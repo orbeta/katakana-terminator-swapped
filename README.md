@@ -1,6 +1,8 @@
 ## Disclaimer
 This is a fork of the Katakana Terminator userscript by Arnie97.
+
 Original source code: https://github.com/Arnie97/katakana-terminator
+
 This version of the script has been modified to swap the location of Katakana words and their English translations so that the translated English word appears in the main text body and the original Katakana word is placed in the rt (ruby title) element. Everything else remain the same.
 
 ### Katakana Terminator 片假名终结者 カタカナ‌ターミネーター
