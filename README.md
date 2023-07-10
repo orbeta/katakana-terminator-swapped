@@ -1,9 +1,18 @@
+## Disclaimer
+This is a fork of the Katakana Terminator userscript by Arnie97.
+Original source code: https://github.com/Arnie97/katakana-terminator
+This version of the script has been modified to swap the location of Katakana words and their English translations so that the translated English word appears in the main text body and the original Katakana word is placed in the rt (ruby title) element. Everything else remain the same.
+
 ### Katakana Terminator 片假名终结者 カタカナ‌ターミネーター
 
 #### In a nutshell 简介
-A browser extension to convert *gairaigo* (Japanese loan words) back to English.
+A browser extension to add English annotations above *gairaigo* (Japanese loan words).
 
 这是一个浏览器扩展插件，在网页中的日语外来语上方标注英文原词。
+
+Folk: katagana and english annotation locations are swapped.
+
+在这个folk中，英文原词被移到了主体，片假名被移到上方标注的位置。
 
 #### Installation 安装
 Please follow the [installation instructions](https://greasyfork.org/en) to configure your browser,

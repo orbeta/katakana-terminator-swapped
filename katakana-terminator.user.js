@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name        Katakana Terminator
-// @description Convert gairaigo (Japanese loan words) back to English
+// @name        Katakana Terminator Swapped
+// @description Convert gairaigo (Japanese loan words) back to English. 
 // @author      Arnie97
 // @license     MIT
 // @copyright   2017-2021, Katakana Terminator Contributors (https://github.com/Arnie97/katakana-terminator/graphs/contributors)
@@ -22,6 +22,7 @@
 // @description:zh-CN 在网页中的日语外来语上方标注英文原词
 // ==/UserScript==
 
+// This version of the script has been modified by orbeta to swap the location of Katakana words and their English translations that the translated English word appears in the main text body and the original Katakana word is placed in the rt (ruby title) element. Everything else remain the same.
 // define some shorthands
 var _ = document;
 
@@ -59,17 +60,14 @@ function addRuby(node) {
         return false;
     }
     var ruby = _.createElement('ruby');
-    ruby.appendChild(_.createTextNode(match[0]));
     var rt = _.createElement('rt');
     rt.classList.add('katakana-terminator-rt');
+    rt.textContent = match[0]; // set the katakana word in the rt element
     ruby.appendChild(rt);
 
-    // Append the ruby title node to the pending-translation queue
     queue[match[0]] = queue[match[0]] || [];
-    queue[match[0]].push(rt);
+    queue[match[0]].push(ruby); // changed this to be the ruby element instead of rt
 
-    // <span>[startカナmiddleテストend]</span> =>
-    // <span>start<ruby>カナ<rt data-rt="Kana"></rt></ruby>[middleテストend]</span>
     var after = node.splitText(match.index);
     node.parentNode.insertBefore(ruby, after);
     after.nodeValue = after.nodeValue.substring(match[0].length);
@@ -223,7 +221,7 @@ function updateRubyByCachedTranslations(phrase) {
         return;
     }
     (queue[phrase] || []).forEach(function(node) {
-        node.dataset.rt = cachedTranslations[phrase];
+        node.insertBefore(_.createTextNode(cachedTranslations[phrase]), node.firstChild); // insert the translated English word into the ruby node before the rt element
     });
     delete queue[phrase];
 }
